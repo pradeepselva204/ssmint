@@ -23,8 +23,7 @@
     "react-dom": "18.2.0",
     "react-toastify": "^9.0.7",
     "web3": "^1.7.4",
-    "web3modal": "^1.9.8",
-    "package-name": "git+https://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:x-oauth-basic@github.com/pradeepselva204/stonesquadmint.git"
+    "web3modal": "^1.9.8"
   },
   "devDependencies": {
     "eslint": "8.20.0",

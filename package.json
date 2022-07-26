@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "package-name": "git+https://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:x-oauth-basic@github.com/pradeepselva204/stonesquadmint.git",
     "@coinbase/wallet-sdk": "^3.4.0",
     "@metamask/detect-provider": "^1.2.0",
     "@openzeppelin/contracts": "^4.7.1",

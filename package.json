@@ -9,21 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@coinbase/wallet-sdk": "git+https://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:x-oauth-basic@github.com/pradeepselva204/stonesquadmint.git#semver:3.4.0",
-    "@metamask/detect-provider": "git+https://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:x-oauth-basic@github.com/pradeepselva204/stonesquadmint.git#semver:1.2.0",
-    "@openzeppelin/contracts": "git+https://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:x-oauth-basic@github.com/pradeepselva204/stonesquadmint.git#semver:4.7.1",
-    "@truffle/hdwallet-provider": "git+https://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:x-oauth-basic@github.com/pradeepselva204/stonesquadmint.git#semver:2.0.12",
-    "@walletconnect/web3-provider": "git+https://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:x-oauth-basic@github.com/pradeepselva204/stonesquadmint.git#semver:1.7.8",
-    "buffer": "git+https://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:x-oauth-basic@github.com/pradeepselva204/stonesquadmint.git#semver:6.0.3",
-    "ethers": "git+https://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:x-oauth-basic@github.com/pradeepselva204/stonesquadmint.git#semver:5.6.9",
-    "keccak256": "git+https://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:x-oauth-basic@github.com/pradeepselva204/stonesquadmint.git#semver:1.0.6",
-    "merkletreejs": "git+https://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:x-oauth-basic@github.com/pradeepselva204/stonesquadmint.git#semver:0.2.32",
+    "@coinbase/wallet-sdk": "^3.4.0",
+    "@metamask/detect-provider": "^1.2.0",
+    "@walletconnect/web3-provider": "^1.7.8",
+    "buffer": "^6.0.3",
+    "ethers": "^5.6.9",
+    "keccak256": "^1.0.6",
+    "merkletreejs": "^0.2.32",
     "next": "12.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-toastify": "git+https://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:x-oauth-basic@github.com/pradeepselva204/stonesquadmint.git#semver:9.0.7",
-    "web3": "git+https://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:x-oauth-basic@github.com/pradeepselva204/stonesquadmint.git#semver:1.7.4",
-    "web3modal": "git+https://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:x-oauth-basic@github.com/pradeepselva204/stonesquadmint.git#semver:1.9.8"
+    "react-toastify": "^9.0.7",
+    "web3": "^1.7.4",
+    "web3modal": "^1.9.8"
   },
   "devDependencies": {
     "eslint": "8.20.0",

@@ -209,12 +209,13 @@ const MintPage = () =>{
         const addresses= [
             "0xD4058183C15b9a3FccD59f161A2345945dD93d11",
             "0x806687546d3eb695947ebb69B0ad7149145b3Aba",
+            "0x4a17928e2913625476346195B4aa0E845028B90a",
+            "0xB2dc8dAC8195B2F98805cBC481ad2C41CE5fA501",
             "0xE3FC30F156C46B545c0D33DF6aFBE4DC6426FE10",            
             "0xD4058183C15b9a3FccD59f161A2345945dD93d12",
             "0xD4058183C15b9a3FccD59f161A2345945dD93d13",
             "0xD4058183C15b9a3FccD59f161A2345945dD93d14",
-            "0xD4058183C15b9a3FccD59f161A2345945dD93d15",
-            "0x971C0a106D94De1a6A9E6E9c5d5086144d8a2186"
+            "0xD4058183C15b9a3FccD59f161A2345945dD93d15"
         ]
         const leaves = addresses.map(x=>keccak256(x))
         const tree = new MerkleTree(leaves,keccak256,{sortPairs:true})

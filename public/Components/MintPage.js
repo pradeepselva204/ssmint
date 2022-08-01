@@ -357,21 +357,28 @@ const MintPage = () =>{
                                             </span>
                                         </div>
                                     </div>
-                                </div>          
-                                <div className="tickercontainerbox">
-                                    <div className='tickerdisplay'>
-                                        <div className='tickerminted'>
-                                            Total Minted {state.totalMinted} / 4444
-                                        </div>
-                                    </div>
-                                </div>                
-                                <div className="tickercontainerbox">
-                                    <div className='tickerdisplay'>
-                                        <div className='tickerminted'>
-                                            Total Price:  {utils.formatEther(state.tokenPrice.mul(state.mintAmount))}
-                                        </div>
-                                    </div>
-                                </div>                                                                         
+                                </div>      
+
+                                {
+                                    connect ? 
+                                    
+                                    <>
+                                        <div className="tickercontainerbox">
+                                            <div className='tickerdisplay'>
+                                                <div className='tickerminted'>
+                                                    Total Minted {state.totalMinted} / 4444
+                                                </div>
+                                            </div>
+                                        </div>                
+                                        <div className="tickercontainerbox">
+                                            <div className='tickerdisplay'>
+                                                <div className='tickerminted'>
+                                                    Total Price:  {utils.formatEther(state.tokenPrice.mul(state.mintAmount))}
+                                                </div>
+                                            </div>
+                                        </div>                                                                         
+                                    </> : null
+                                }    
                             </div>
                             {/* <div className="container">
                             <span className='headercounter'>Whitelist Minting in</span>

@@ -133,7 +133,7 @@ const MintPage = () =>{
     }
 
     const whitelistTimer = () =>{
-            let endTime = new Date("2022/08/15");
+            let endTime = new Date("2022/08/03");
             let endTimeParse = Date.parse(endTime) / 1000
         let now = new Date();
         let nowParse = Date.parse(now) / 1000;

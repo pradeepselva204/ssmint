@@ -276,8 +276,8 @@ const MintPage = () =>{
                                                 </div>
                                             </div>
                                             <div className="ticker">
-                                                Ends In
-                                                <div className='tickerboxcontainer'>
+                                                Ended
+                                                {/* <div className='tickerboxcontainer'>
                                                     <div className='tickerbox'>
                                                         <div className='tickerboxdisplay'>
                                                             <span>{days}</span>
@@ -298,7 +298,7 @@ const MintPage = () =>{
                                                             <span>{seconds}</span>
                                                         </div>
                                                     </div>                                                                                                                                                            
-                                                </div>
+                                                </div> */}
                                             </div>                                            
                                         </div>
                                         <div className="tickernotification">
@@ -323,7 +323,7 @@ const MintPage = () =>{
                                                 </div>
                                             </div>
                                             <div className="ticker">
-                                                Starts In
+                                                Ends In
                                                 <div className='tickerboxcontainer'>
                                                     <div className='tickerbox'>                                                        
                                                         <div className='tickerboxdisplay'>

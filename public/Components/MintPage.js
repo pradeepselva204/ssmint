@@ -7,6 +7,7 @@ import { useState,useEffect } from 'react';
 import keccak256 from 'keccak256';
 import { Buffer } from "buffer/";
 import { MerkleTree } from 'merkletreejs';
+import eth from '../images/eth.png'
 import Web3Modal from 'web3modal'
 // import { getNFTs, useMoralis } from "react-moralis"
 // import '../Components/MintPage.css'
@@ -42,6 +43,8 @@ const MintPage = () =>{
     const [seconds, setSeconds] = useState("");
     const [state,setState] = useState(defaultState)
     const [connect,setConnect] = useState(false)
+    const [connectLoading,setConnectLoading] = useState(false)
+    const [minting,setMinting] = useState(false)
     const [nft,setNFT] = useState([])
     const [provider,setProvider] = useState(null)
     const canMint = () =>{
@@ -54,12 +57,14 @@ const MintPage = () =>{
     
     const connectWallet = async() =>{
         try{
-            // console.log(web3Modal.cachedProvider)        
+            
+            setConnectLoading(true)      
             const connection = await web3Modal.connect()
-            console.log(connection)
+            
             await setProvider(connection)
             // delay(100)
             await checkMetaMask()
+            setConnectLoading(false)      
         }catch(e){
             toast.error(e)
         }
@@ -72,7 +77,7 @@ const MintPage = () =>{
     const checkMetaMask = async () =>{
         
         const browserProvider = await detectEthereumProvider()
-        console.log(browserProvider)
+        
         if(
             !browserProvider){
             toast.error("MetaMask Not Installed")
@@ -87,7 +92,7 @@ const MintPage = () =>{
             }else{
                 const network = await provider.getNetwork();
                 const signer = provider.getSigner()
-                console.log(network)
+                
                 
                 if(network.chainId===NetworkID){
                     
@@ -99,7 +104,7 @@ const MintPage = () =>{
                     toast.error("Connect to ETH Network") 
                     
                 }
-                console.log(contract)
+                
                 let perTx = 1
                 let paused = true
                 if(await (contract.paused()))
@@ -111,7 +116,7 @@ const MintPage = () =>{
                     perTx = 5
                     paused = false
                 }
-                // {console.log((await (contract.getMinted())).toNumber())}
+                
                 setConnect(true)
                 setState({
                     ...state,
@@ -126,21 +131,20 @@ const MintPage = () =>{
                     maxMintAmountPerTx: perTx,
                     totalMinted: (await (contract.getMinted())).toNumber()
                   });  
-                //   console.log(paused)
-                //   console.log(state.tokenPrice)              
+            
             }
         }
     }
 
     const whitelistTimer = () =>{
-            let endTime = new Date("2022/08/03");
+            let endTime = new Date("2022/08/10");
             let endTimeParse = Date.parse(endTime) / 1000
         let now = new Date();
         let nowParse = Date.parse(now) / 1000;
-        // console.log(endTimeParse)
+        
             let timeLeft = nowParse - endTimeParse;//endTimeParse - nowParse
         timeLeft = 119 - timeLeft;
-        // console.log(timeLeft)
+        
         if(timeLeft>0)
         {		
             
@@ -170,39 +174,44 @@ const MintPage = () =>{
     }
 
     const decrementMintAmount = () =>{
-        console.log(state.mintAmount)
+        
         setState({
             ...state,
             mintAmount: Math.max(1, state.mintAmount - 1),
           });
     }
     const incrementMintAmount = () =>{
-        console.log(state.maxMintAmountPerTx)
+        
         setState({
             ...state,
             mintAmount: Math.min(state.maxMintAmountPerTx, state.mintAmount + 1)
         })
     }
     const mint = async () =>{
-        console.log(state.isPaused)
+        setMinting(true)
         if(!state.isPaused){
             await tokenMint()
         }
-        console.log(state.isWhitelistMintEnabled)
+        
         if(canWhitelistMint()){
             await whitelistMint()
         }
-        
+        setMinting(false)
         if(state.isPaused && !canWhitelistMint())
         {
-            // console.log("Here")
+            
             toast.error("Sales not active")
         }
     }
     const tokenMint = async () =>{
         await checkMetaMask()
-        console.log(state.mintAmount)
-        await state.contract.mint(state.mintAmount, {value:state.tokenPrice.mul(state.mintAmount)});
+        try{
+
+            await state.contract.mint(state.mintAmount, {value:state.tokenPrice.mul(state.mintAmount)});
+        }catch(err)
+        {
+            toast.error(err.message)
+        }
     }    
     const whitelistMint = async () =>{
         await checkMetaMask()
@@ -221,25 +230,31 @@ const MintPage = () =>{
         const leaves = addresses.map(x=>keccak256(x))
         const tree = new MerkleTree(leaves,keccak256,{sortPairs:true})
         const buf2hex = x=> '0x' + x.toString('hex')
-        console.log(buf2hex(tree.getRoot()))
+        
         const leaf = keccak256("0xD4058183C15b9a3FccD59f161A2345945dD93d11")
         // const proof = tree.getHexProof(leaf).toString().replaceAll('\'', '').replaceAll(' ', '');
         const proof = tree.getHexProof(keccak256(state.userAddress))
-        console.log(proof)
+        
         const checkLeaf = tree.getLeafIndex(Buffer.from(keccak256(state.userAddress))) >=0
         if(checkLeaf){
-            // console.log()
+            
             // let amount = 
-            // console.log(amount)
+            
         //    await(state.contract.whitelistMint(amount,proof,{value:ethers.utils.parseUnits("0.001", 18)}))
-           await(state.contract.whitelistMint(state.mintAmount,proof,{value:state.tokenPrice}))
+            try{
+
+                await(state.contract.whitelistMint(state.mintAmount,proof,{value:state.tokenPrice}))
+            }catch(err){
+                toast.error(err.message)
+            }
+
         }
     }
     const getNFTs = async () =>{
         const options = {chain:"0x4",address:"0xD4058183C15b9a3FccD59f161A2345945dD93d11",token_address:"0x65EC956d1a4dDA184fa4cC8487c478C39E4B0DD7"}
         const NFTs = await Moralis.Web3.getNFTs(options)
         setNFT(NFTs)
-        console.log(NFTs)
+        
 
     }
     useEffect(() =>{
@@ -263,6 +278,14 @@ const MintPage = () =>{
                 <>
                     <div className="bg">
                         <div className="mainlayout">
+                            {connectLoading && 
+                            
+                                <>
+                                    <div className="loadinglayout">
+                                        <div className="loader">Loading</div>
+                                    </div>
+                                </>
+                            }
                             <div className='tickercontainer'>
                                 <div className="tickercontainerbox">
                                     <div className='tickerdisplay'>
@@ -306,7 +329,12 @@ const MintPage = () =>{
                                             <b>*</b>
                                             <span>
                                                 <div style={{display:"inline"}}>
-                                                    Price 0.1 ETH
+                                                    Price 0.1
+                                                </div>
+                                            </span>
+                                            <span>
+                                                <div style={{display:"inline"}}>
+                                                    <img alt="ETH" src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg" style={{marginLeft:"2px",height:"20px"}}></img>              
                                                 </div>
                                             </span>
                                         </div>                                        
@@ -354,15 +382,22 @@ const MintPage = () =>{
                                             <b>*</b>
                                             <span>
                                                 <div style={{display:"inline"}}>
-                                                    Price 0.15 ETH
+                                                    Price 0.15 ETH 
+                                                </div>
+                                            </span>
+                                            <span>
+                                                <div style={{display:"inline"}}>
+                                                    <img alt="ETH" src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg" style={{marginLeft:"2px",height:"20px"}}></img>              
                                                 </div>
                                             </span>
                                         </div>
                                     </div>
                                 </div>      
+                                {/* { connectLoading && <div className={loading?"loader":null}>Loading</div>} */}
 
                                 {
-                                    connect ? 
+                                    
+                                     connect  ? 
                                     
                                     <>
                                         <div className="tickercontainerbox">
@@ -375,7 +410,8 @@ const MintPage = () =>{
                                         <div className="tickercontainerbox">
                                             <div className='tickerdisplay'>
                                                 <div className='tickerminted'>
-                                                    Total Price:  {utils.formatEther(state.tokenPrice.mul(state.mintAmount))}
+                                                    Total Price:  {utils.formatEther(state.tokenPrice.mul(state.mintAmount))}                                                     
+                                                    <img alt="ETH" src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg" style={{marginLeft:"10px",height:"25px"}}></img>                                                    
                                                 </div>
                                             </div>
                                         </div>                                                                         
@@ -423,9 +459,20 @@ const MintPage = () =>{
 
                                 {connect ? 
                                 
-                                <>
-                                    <button className="primary-button hero w-button" onClick={mint}>Mint</button>
-                                    <button className="primary-button hero w-button" onClick={disconnectWallet}>Disconnect Wallet</button>  
+                                <> 
+                                    {
+                                        minting ? 
+                                        <>
+                                            <div className="loadinglayout">
+                                                <div className="loader">Minting</div>
+                                            </div>
+                                        </> :
+
+                                        <>
+                                            <button className="primary-button hero w-button" onClick={mint}>Mint</button>
+                                            <button className="primary-button hero w-button" onClick={disconnectWallet}>Disconnect Wallet</button>                                          
+                                        </>
+                                    }
                                 </>
 
                                 :

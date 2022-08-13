@@ -3897,6 +3897,7 @@ const MintPage = () =>{
                 <>
                             <div className="topconnectwallet">
                                 <div className="connectarea">
+                                    <img src="./images/logo.png" style={{height:"50px",width:"50px"}}/>
                                     <button className="topconnectbutton" onClick={connectWallet}>{buttonStatus}</button>
                                 </div>
                             </div>

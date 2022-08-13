@@ -1,4 +1,8 @@
-
+@font-face {
+  font-family: "FantaisieArtistique";
+  src: local("FantaisieArtistique"),
+    url("../fonts/FantaisieArtistique.ttf") format("truetype");
+}
 .topconnectwallet{
   top: 5px;
   display: absolute;
@@ -11,21 +15,26 @@
 .connectarea{
   display: flex;
   align-items: center;
-
-
-}
-.topconnectbutton{
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-  cursor: pointer;
-  font-weight: bold;
-  border-radius: 0.375rem;
-  justify-content: center;
   border: 3px solid #e93a88;
   border-radius: 8px;
+}
+.topconnectbutton{
+  /* border-bottom-left-radius: 0;
+  border-top-left-radius: 0; */
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.25em;
+  /* border-radius: 0.375rem; */
+  justify-content: center;
+  align-items: center;
+  font-family: 'FantaisieArtistique', cursive;
+  letter-spacing: 0.12em;
+  border: none;
+  /* border: 3px solid #e93a88;
+  border-radius: 8px; */
   height: 5vh;
-  width: 15vw;
-  padding-top: 10px;
+  width: 10vw;
+  /* padding-top: 10px; */
   transition: all .3s ease;
   display: inline-flex;
 
@@ -151,8 +160,9 @@
 }
 .tickerstatustitle{
   color: #0f0f0f;
-  font-size:12px;
+  font-size:14px;
   padding-bottom: 0.125rem;
+  font-family: 'FantaisieArtistique', cursive;
   padding-top: 0.125rem;
   padding-right: 0.5rem;
   padding-left: 0.5rem;
@@ -163,7 +173,8 @@
 .ticker{
   text-transform: uppercase;
   font-weight: 500;
-  font-size: 0.875rem;
+  font-size: 1rem;
+  font-family: 'FantaisieArtistique', cursive;
   line-height: 1.25rem;
   text-align: center;
   gap: 0.5rem;
@@ -200,8 +211,9 @@
 .tickernotification{
   color:#062844;
   font-weight: bold;
+  font-family: 'FantaisieArtistique', cursive;
   letter-spacing:.025rem;
-  font-size: .875rem;
+  font-size: 1rem;
   line-height:1.25rem;
   gap:0.375rem;
   display: flex;
@@ -328,6 +340,7 @@
     margin-top: 16px;
     margin-bottom: 24px;
     padding: 20px 40px;
+    font-family: 'FantaisieArtistique', cursive;
     -webkit-align-self: center;
     -ms-flex-item-align: center;
     /* background-image: url("./images/stone.jpg"); */

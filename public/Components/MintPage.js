@@ -4106,7 +4106,7 @@ const MintPage = () =>{
 
                                 :
                                     <>                                    
-                                        <button className="primary-button hero w-button" onClick={connectWallet}>Connect Wallet</button>
+                                        {/* <button className="primary-button hero w-button" onClick={connectWallet}>Connect Wallet</button> */}
                                         
                                     </>
                                 }

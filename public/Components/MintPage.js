@@ -8,6 +8,8 @@ import keccak256 from 'keccak256';
 import { Buffer } from "buffer/";
 import { MerkleTree } from 'merkletreejs';
 import eth from '../images/eth.png'
+import logo from "../images/logo.png"
+// import logo1 from "../"
 import Web3Modal from 'web3modal'
 // import { getNFTs, useMoralis } from "react-moralis"
 // import '../Components/MintPage.css'
@@ -3897,7 +3899,7 @@ const MintPage = () =>{
                 <>
                             <div className="topconnectwallet">
                                 <div className="connectarea">
-                                    <img src="./images/logo.png" style={{height:"50px",width:"50px"}}/>
+                                    <img src={logo} style={{height:"50px",width:"50px"}}/>
                                     <button className="topconnectbutton" onClick={connectWallet}>{buttonStatus}</button>
                                 </div>
                             </div>

@@ -8,7 +8,7 @@ import keccak256 from 'keccak256';
 import { Buffer } from "buffer/";
 import { MerkleTree } from 'merkletreejs';
 import eth from '../images/eth.png'
-import logo from "../images/logo.png"
+import logo from "./images/logo.png"
 // import logo1 from "../"
 import Web3Modal from 'web3modal'
 // import { getNFTs, useMoralis } from "react-moralis"

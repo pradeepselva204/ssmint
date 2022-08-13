@@ -4034,7 +4034,10 @@ const MintPage = () =>{
                                             <div className='tickerdisplay'>
                                                 <div className='tickerminted'>
                                                     Total Price:  {utils.formatEther(state.tokenPrice.mul(state.mintAmount))}                                                     
-                                                    <img alt="ETH" src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg" style={{marginLeft:"10px",height:"25px"}}></img>                                                    
+                                                    <div style={{display:"inline"}}>
+
+                                                        <img alt="ETH" src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg" style={{marginLeft:"10px",height:"25px"}}></img>                                                    
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>                                                                         

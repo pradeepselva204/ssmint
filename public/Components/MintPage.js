@@ -15,6 +15,7 @@ import Web3Modal from 'web3modal'
 import {StoneSquadAddress,NetworkID} from '../Config/config.js'
 // import './AdminPage.css'
 import StoneSquad from '../Contract/StoneSquad.json'
+import NavBar from './NavBar';
 // window.Buffer = window.Buffer || Buffer;
 let web3Modal
 const MintPage = () =>{
@@ -47,6 +48,7 @@ const MintPage = () =>{
     const [minting,setMinting] = useState(false)
     const [nft,setNFT] = useState([])
     const [provider,setProvider] = useState(null)
+    const [buttonStatus,setButtonStatus] = useState("Connect Wallet")
     const canMint = () =>{
         // return !state.isPaused || canWhitelistMint();
         return true
@@ -73,6 +75,7 @@ const MintPage = () =>{
         await web3Modal.clearCachedProvider();
         setState(defaultState)
         setConnect(false)
+        setButtonStatus("Connect Wallet")
       }
     const checkMetaMask = async () =>{
         
@@ -92,8 +95,10 @@ const MintPage = () =>{
             }else{
                 const network = await provider.getNetwork();
                 const signer = provider.getSigner()
-                
-                
+                let walletString = walletAccounts[0].substring(0,5)
+                walletString = walletString + "..."
+                walletString = walletString + walletAccounts[0].substring(38,42)
+                setButtonStatus(walletString)
                 if(network.chainId===NetworkID){
                     
                     contract = new ethers.Contract(StoneSquadAddress,StoneSquad.abi,signer)
@@ -216,6 +221,7 @@ const MintPage = () =>{
     const whitelistMint = async () =>{
         await checkMetaMask()
         const addresses= [
+
             "0xD4058183C15b9a3FccD59f161A2345945dD93d11",
             "0x7959f8abfdeb65d9af1b210cdd22fc17b676806a",
             "0x378c146344e945d1e16cc8c39802303a2840a37a",
@@ -3828,14 +3834,17 @@ const MintPage = () =>{
             "0xd5be1a4bd4f1b66801ef25c593c6e52985a00055",
             "0x488da54be478750ed2e8042998bc272582430fc5"
         ]
+        console.log("About to check the leaves")
         const leaves = addresses.map(x=>keccak256(x))
+        console.log("Checked the leaves")
         const tree = new MerkleTree(leaves,keccak256,{sortPairs:true})
+        console.log("checked the tree")
         const buf2hex = x=> '0x' + x.toString('hex')
         
         const leaf = keccak256("0xD4058183C15b9a3FccD59f161A2345945dD93d11")
         // const proof = tree.getHexProof(leaf).toString().replaceAll('\'', '').replaceAll(' ', '');
         const proof = tree.getHexProof(keccak256(state.userAddress))
-        
+        console.log("Cheked the proof")
         const checkLeaf = tree.getLeafIndex(Buffer.from(keccak256(state.userAddress))) >=0
         if(checkLeaf){
             
@@ -3846,9 +3855,18 @@ const MintPage = () =>{
 
                 await(state.contract.whitelistMint(state.mintAmount,proof,{value:state.tokenPrice}))
             }catch(err){
-                toast.error(err.message)
+                if(err?.reason){
+
+                    toast.error(err.reason)
+                }
+                else{
+                    toast.error(err.message)
+                }
             }
 
+        }
+        else{
+            toast.error("You are not authorized whitelist Minter!!!")
         }
     }
     const getNFTs = async () =>{
@@ -3877,16 +3895,21 @@ const MintPage = () =>{
             {canMint() 
             ? 
                 <>
+                            <div className="topconnectwallet">
+                                <div className="connectarea">
+                                    <button className="topconnectbutton" onClick={connectWallet}>{buttonStatus}</button>
+                                </div>
+                            </div>
                     <div className="bg">
                         <div className="mainlayout">
-                            {connectLoading && 
+                            {/* {connectLoading && 
                             
                                 <>
                                     <div className="loadinglayout">
                                         <div className="loader">Loading</div>
                                     </div>
                                 </>
-                            }
+                            } */}
                             <div className='tickercontainer'>
                                 <div className="tickercontainerbox">
                                     <div className='tickerdisplay'>
@@ -3894,8 +3917,7 @@ const MintPage = () =>{
                                             <div>
                                                 <div className='tickerstatus'>
                                                     <div className='tickerstatustitle'>
-                                                        Whitelist 
-                                                        Minting
+                                                        Whitelist Sale
                                                     </div>
                                                 </div>
                                             </div>
@@ -4070,7 +4092,7 @@ const MintPage = () =>{
                                         </> :
 
                                         <>
-                                            <button className="primary-button hero w-button" onClick={mint}>Mint</button>
+                                            <button className="primary-button hero w-button" onClick={mint}>MINT</button>
                                             <button className="primary-button hero w-button" onClick={disconnectWallet}>Disconnect Wallet</button>                                          
                                         </>
                                     }

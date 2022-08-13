@@ -1,4 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+
+.topconnectwallet{
+  top: 5px;
+  display: absolute;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 20px;
+  margin-top: 10px;
+  float: right;
+}
+.connectarea{
+  display: flex;
+  align-items: center;
+
+
+}
+.topconnectbutton{
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 0.375rem;
+  justify-content: center;
+  border: 3px solid #e93a88;
+  border-radius: 8px;
+  height: 5vh;
+  width: 15vw;
+  padding-top: 10px;
+  transition: all .3s ease;
+  display: inline-flex;
+
+}
+.hamburger{
+    display: block;
+    width: 32px;
+    height: 2px;
+    background-color: #000;
+    transition: transform 0.1s cubic-bezier(.645,.045,.355,1);
+    margin-top: 0.5rem;
+}
+
+.hamburgerfirstactive{  
+    display: block;
+    width: 32px;
+    height: 2px;
+    /* transform-origin: 1px center; */
+    background-color: #000;
+    transform: rotate(-45deg);    
+    transition: transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+.hamburgersecondactive{
+    display: block;
+    width: 32px;
+    /* transform-origin: 1px center; */
+    height: 2px;
+    background-color: #000;
+    transform: rotate(45deg);
+    transition: transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
+@media screen and (max-width:768px) {
+    .hamburger{
+        width: 20px;
+    }
+}
 .mainlayout{
     height: 100vh;
     width: 100vw;
@@ -92,7 +160,7 @@
   padding-top: 0.125rem;
   padding-right: 0.5rem;
   padding-left: 0.5rem;
-  background-color: #D65170;
+  background-color: #e7dfe0;
   border-radius: 20%;
   height: fit-content;
 }
@@ -124,7 +192,7 @@
   font-size: .875rem;
   line-height: 1.25rem;
   /* border-color: #D65170; */
-  background-color:#D65170;
+  background-color:#e7dfe0;
   justify-content: center;
   align-items:center;
   border-radius: 0.25rem;
@@ -175,7 +243,7 @@
     transition: color 200ms ease, background-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
 }
 .calcbutton{
-    background-color: #D65170;
+    background-color: #e7dfe0;
     border-radius: 5px;
     box-shadow: 0px 2px 2px 1px #0f0f0f;
     color: #fff;
@@ -254,7 +322,7 @@
     
     border-radius: 5px;
     box-shadow: 0px 2px 2px 1px #0f0f0f;
-    border: 1px solid #D65170;
+    border: 1px solid #e7dfe0;
     margin: 10px;
     color: #fff;
 }

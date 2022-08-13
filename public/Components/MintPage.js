@@ -4086,9 +4086,9 @@ const MintPage = () =>{
                                     {
                                         minting ? 
                                         <>
-                                            <div className="loadinglayout">
+                                            {/* <div className="loadinglayout">
                                                 <div className="loader">Minting</div>
-                                            </div>
+                                            </div> */}
                                         </> :
 
                                         <>

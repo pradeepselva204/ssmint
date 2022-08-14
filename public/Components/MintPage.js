@@ -7766,11 +7766,11 @@ const MintPage = () =>{
                                             </div>                                            
                                         </div>
                                         <div className="tickernotification">
-                                            <span>Max 1 Token</span>
+                                            <span>Max 5 Token</span>
                                             <b>*</b>
                                             <span>
                                                 <div style={{display:"inline"}}>
-                                                    Price 0.1
+                                                    Price 0.11
                                                 </div>
                                             </span>
                                             <span>
@@ -7819,11 +7819,11 @@ const MintPage = () =>{
                                             </div>
                                         </div>
                                         <div className="tickernotification">
-                                            <span>Max 5 Tokens</span>
+                                            <span>Max 7 Tokens</span>
                                             <b>*</b>
                                             <span>
                                                 <div style={{display:"inline"}}>
-                                                    Price 0.15 ETH 
+                                                    Price 0.13 ETH 
                                                 </div>
                                             </span>
                                             <span>

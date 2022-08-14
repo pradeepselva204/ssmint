@@ -44,6 +44,14 @@ const MintPage = () =>{
     const [hours, setHours] = useState("");
     const [minutes, setMinutes] = useState("");
     const [seconds, setSeconds] = useState("");
+    const [saledays, setSaleDays] = useState("");
+    const [salehours, setSaleHours] = useState("");
+    const [saleminutes, setSaleMinutes] = useState("");
+    const [saleseconds, setSaleSeconds] = useState("");
+    const [wlStatus,setWlStatus] = useState(true)
+    const [wlActive,setWlActive]=useState(false)
+    const [saleStatus,setSaleStatus] = useState(true)
+    const [saleActive,setSaleActive]=useState(false)
     const [state,setState] = useState(defaultState)
     const [connect,setConnect] = useState(false)
     const [connectLoading,setConnectLoading] = useState(false)
@@ -144,40 +152,161 @@ const MintPage = () =>{
     }
 
     const whitelistTimer = () =>{
-            let endTime = new Date("2022/08/10");
-            let endTimeParse = Date.parse(endTime) / 1000
+        let wLCommenceTime = new Date("2022/08/14 09:51:00");
+        let endTime = new Date("2022/08/14 09:52:00");
+        
+
+        let endTimeParse = Date.parse(endTime) / 1000
+        let commenceTimeParse = Date.parse(wLCommenceTime) / 1000
         let now = new Date();
         let nowParse = Date.parse(now) / 1000;
         
-            let timeLeft = nowParse - endTimeParse;//endTimeParse - nowParse
-        timeLeft = 119 - timeLeft;
+        let timeLeft = nowParse - endTimeParse;//endTimeParse - nowParse
+        timeLeft = 120 - timeLeft;
+
+        let commenceTimeLeft = nowParse - commenceTimeParse;//endTimeParse - nowParse
+        commenceTimeLeft = 120 - commenceTimeLeft;
         
-        if(timeLeft>0)
-        {		
-            
-            let countdays = Math.floor(timeLeft / 86400);
-            
-            let counthours = Math.floor((timeLeft - countdays * 86400) / 3600);
-            let countminutes = Math.floor(
-            (timeLeft - countdays * 86400 - counthours * 3600) / 60
-            );
-            let countseconds = Math.floor(
-            timeLeft - countdays * 86400 - counthours * 3600 - countminutes * 60
-            );
-            if (counthours < "10") {
-            counthours = "0" + counthours;
-            }
-            if (countminutes < "10") {
-            countminutes = "0" + countminutes;
-            }
-            if (countseconds < "10") {
-            countseconds = "0" + countseconds;
-            }
-            setDays(countdays);
-            setHours(counthours);
-            setMinutes(countminutes);
-            setSeconds(countseconds);
+
+        if(timeLeft<0 && commenceTimeLeft<0){
+            setWlActive(false)
+            setWlStatus(false)
+        }else{
+            if(commenceTimeLeft>=0){
+                
+                let countdays = Math.floor(commenceTimeLeft / 86400);
+                let counthours = Math.floor((commenceTimeLeft - countdays * 86400) / 3600);
+                let countminutes = Math.floor(
+                (commenceTimeLeft - countdays * 86400 - counthours * 3600) / 60
+                );
+                let countseconds = Math.floor(
+                commenceTimeLeft - countdays * 86400 - counthours * 3600 - countminutes * 60
+                );
+                if (counthours < "10") {
+                counthours = "0" + counthours;
+                }
+                if (countminutes < "10") {
+                countminutes = "0" + countminutes;
+                }
+                if (countseconds < "10") {
+                countseconds = "0" + countseconds;
+                }
+                setDays(countdays);
+                setHours(counthours);
+                setMinutes(countminutes);
+                setSeconds(countseconds);
+            }else{
+                
+                if(timeLeft>=0)
+                {		
+                    if(!wlActive){setWlActive(true)}
+                
+                    let countdays = Math.floor(timeLeft / 86400);
+                    let counthours = Math.floor((timeLeft - countdays * 86400) / 3600);
+                    let countminutes = Math.floor(
+                    (timeLeft - countdays * 86400 - counthours * 3600) / 60
+                    );
+                    let countseconds = Math.floor(
+                    timeLeft - countdays * 86400 - counthours * 3600 - countminutes * 60
+                    );
+                    if (counthours < "10") {
+                    counthours = "0" + counthours;
+                    }
+                    if (countminutes < "10") {
+                    countminutes = "0" + countminutes;
+                    }
+                    if (countseconds < "10") {
+                    countseconds = "0" + countseconds;
+                    }
+                    setDays(countdays);
+                    setHours(counthours);
+                    setMinutes(countminutes);
+                    setSeconds(countseconds);
+                }  else{
+                    setWlActive(false)
+                    setWlStatus(false)
+                }                     
+            }            
         }
+
+        wLCommenceTime = new Date("2022/08/14 10:00:00");
+        endTime = new Date("2022/08/14 10:03:00");
+        
+
+        endTimeParse = Date.parse(endTime) / 1000
+        commenceTimeParse = Date.parse(wLCommenceTime) / 1000
+        now = new Date();
+        nowParse = Date.parse(now) / 1000;
+        
+        timeLeft = nowParse - endTimeParse;//endTimeParse - nowParse
+        timeLeft = 120 - timeLeft;
+
+        commenceTimeLeft = nowParse - commenceTimeParse;//endTimeParse - nowParse
+        commenceTimeLeft = 120 - commenceTimeLeft;
+        
+
+        if(timeLeft<0 && commenceTimeLeft<0){
+            setSaleActive(false)
+            setSaleStatus(false)
+        }else{
+            if(commenceTimeLeft>=0){
+                
+                let countdays = Math.floor(commenceTimeLeft / 86400);
+                let counthours = Math.floor((commenceTimeLeft - countdays * 86400) / 3600);
+                let countminutes = Math.floor(
+                (commenceTimeLeft - countdays * 86400 - counthours * 3600) / 60
+                );
+                let countseconds = Math.floor(
+                commenceTimeLeft - countdays * 86400 - counthours * 3600 - countminutes * 60
+                );
+                if (counthours < "10") {
+                counthours = "0" + counthours;
+                }
+                if (countminutes < "10") {
+                countminutes = "0" + countminutes;
+                }
+                if (countseconds < "10") {
+                countseconds = "0" + countseconds;
+                }
+                setSaleDays(countdays);
+                setSaleHours(counthours);
+                setSaleMinutes(countminutes);
+                setSaleSeconds(countseconds);
+            }else{
+                
+                if(timeLeft>=0)
+                {		
+                    if(!saleActive){setSaleActive(true)}
+                    
+                    let countdays = Math.floor(timeLeft / 86400);
+                    let counthours = Math.floor((timeLeft - countdays * 86400) / 3600);
+                    let countminutes = Math.floor(
+                    (timeLeft - countdays * 86400 - counthours * 3600) / 60
+                    );
+                    let countseconds = Math.floor(
+                    timeLeft - countdays * 86400 - counthours * 3600 - countminutes * 60
+                    );
+                    if (counthours < "10") {
+                    counthours = "0" + counthours;
+                    }
+                    if (countminutes < "10") {
+                    countminutes = "0" + countminutes;
+                    }
+                    if (countseconds < "10") {
+                    countseconds = "0" + countseconds;
+                    }
+                    setSaleDays(countdays);
+                    setSaleHours(counthours);
+                    setSaleMinutes(countminutes);
+                    setSaleSeconds(countseconds);
+                }  else{
+                    setSaleActive(false)
+                    setSaleStatus(false)
+                }                     
+            }            
+        }
+ 
+
     }
 
     const decrementMintAmount = () =>{
@@ -238,6 +367,9 @@ const MintPage = () =>{
         
         const addresses= [
             "0xD4058183C15b9a3FccD59f161A2345945dD93d11",
+            "0x4a17928e2913625476346195B4aa0E845028B90a",
+            "0xd6486e5c16CaD8CF80E3bAa90c379dC388636da2",
+            "0x5BAB2C474D6e06C62fDA4FfDb78cF6eB77ad9337",
             "0x0dc09d668ab3c6cbdf90c7d49872b115f9ff423d",
             "0x6a1afa7234127b86078d017fac5a0656a9107447",
             "0x000f10fa8c5eb00d1a238f4809fed4167cb0af7e",
@@ -3957,6 +4089,9 @@ const MintPage = () =>{
         await checkMetaMask()
         const addresses= [
             "0xD4058183C15b9a3FccD59f161A2345945dD93d11",
+            "0x4a17928e2913625476346195B4aa0E845028B90a",
+            "0xd6486e5c16CaD8CF80E3bAa90c379dC388636da2",
+            "0x5BAB2C474D6e06C62fDA4FfDb78cF6eB77ad9337",
             "0x0dc09d668ab3c6cbdf90c7d49872b115f9ff423d",
             "0x6a1afa7234127b86078d017fac5a0656a9107447",
             "0x000f10fa8c5eb00d1a238f4809fed4167cb0af7e",
@@ -7740,29 +7875,37 @@ const MintPage = () =>{
                                                 </div>
                                             </div>
                                             <div className="ticker">
-                                                Ended
-                                                {/* <div className='tickerboxcontainer'>
-                                                    <div className='tickerbox'>
-                                                        <div className='tickerboxdisplay'>
-                                                            <span>{days}</span>
+                                                {(!wlActive && wlStatus )?"Starts in":null}
+                                                {(wlActive && wlStatus ) ? "Ends in" : null}
+                                                {(!wlActive && !wlStatus) ? "Ended" :null }
+                                                {(wlStatus) ?                                                                                                 
+                                                <>
+                                                
+                                                    <div className='tickerboxcontainer'>
+                                                        <div className='tickerbox'>
+                                                            <div className='tickerboxdisplay'>
+                                                                <span>{days}</span>
+                                                            </div>
                                                         </div>
+                                                        <div className='tickerbox'>
+                                                            <div className='tickerboxdisplay'>
+                                                                <span>{hours}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className='tickerbox'>
+                                                            <div className='tickerboxdisplay'>
+                                                                <span>{minutes}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className='tickerbox'>
+                                                            <div className='tickerboxdisplay'>
+                                                                <span>{seconds}</span>
+                                                            </div>
+                                                        </div>                                                                                                                                                            
                                                     </div>
-                                                    <div className='tickerbox'>
-                                                        <div className='tickerboxdisplay'>
-                                                            <span>{hours}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className='tickerbox'>
-                                                        <div className='tickerboxdisplay'>
-                                                            <span>{minutes}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className='tickerbox'>
-                                                        <div className='tickerboxdisplay'>
-                                                            <span>{seconds}</span>
-                                                        </div>
-                                                    </div>                                                                                                                                                            
-                                                </div> */}
+                                                
+                                                </> :null }
+
                                             </div>                                            
                                         </div>
                                         <div className="tickernotification">
@@ -7792,30 +7935,38 @@ const MintPage = () =>{
                                                 </div>
                                             </div>
                                             <div className="ticker">
-                                                Ends In
-                                                <div className='tickerboxcontainer'>
-                                                    <div className='tickerbox'>                                                        
-                                                        <div className='tickerboxdisplay'>
-                                                            <span>{days+1}</span>
+                                                {(!saleActive && saleStatus )?"Starts in":null}
+                                                {(saleActive && saleStatus ) ? "Ends in" : null}
+                                                {(!saleActive && !saleStatus) ? "Ended" :null }
+                                                {saleStatus ?
+                                                 
+                                                    <>
+                                                        <div className='tickerboxcontainer'>
+                                                            <div className='tickerbox'>                                                        
+                                                                <div className='tickerboxdisplay'>
+                                                                    <span>{saledays}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className='tickerbox'>                                                        
+                                                                <div className='tickerboxdisplay'>
+                                                                    <span>{salehours}</span>
+                                                                </div>
+                                                            </div>   
+                                                            <div className='tickerbox'>                                                        
+                                                                <div className='tickerboxdisplay'>
+                                                                    <span>{saleminutes}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div className='tickerbox'>                                                        
+                                                                <div className='tickerboxdisplay'>
+                                                                    <span>{saleseconds}</span>
+                                                                </div>
+                                                            </div>                                                                                                                                                         
+                                                            
                                                         </div>
-                                                    </div>
-                                                    <div className='tickerbox'>                                                        
-                                                        <div className='tickerboxdisplay'>
-                                                            <span>{hours}</span>
-                                                        </div>
-                                                    </div>   
-                                                    <div className='tickerbox'>                                                        
-                                                        <div className='tickerboxdisplay'>
-                                                            <span>{minutes}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div className='tickerbox'>                                                        
-                                                        <div className='tickerboxdisplay'>
-                                                            <span>{seconds}</span>
-                                                        </div>
-                                                    </div>                                                                                                                                                         
                                                     
-                                                </div>
+                                                    </> : null
+                                                }
                                             </div>
                                         </div>
                                         <div className="tickernotification">

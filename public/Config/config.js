@@ -1,2 +1,2 @@
-export const StoneSquadAddress="0xe0708946AC9Ab9b02bb510D60f71C8d881C124d6"
+export const StoneSquadAddress="0x1a4779A4fC3804B2bfC49D4F0c31194566338b38"
 export const NetworkID=4

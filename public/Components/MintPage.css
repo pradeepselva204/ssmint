@@ -431,6 +431,35 @@
     cursor: pointer;
     border-radius: 0;
   }
+  @media only screen and (max-width:1280px){
+    .tickercontainer{
+      width: 40vw;
+    }
+    .w-button {
+      width: 25vw;
+    }
+    .connectarea{
+      width: 20vw;
+    }
+    .topconnectbutton{
+      width: 20vw;
+    }
+   }
+   @media only screen and (max-width:1024px){
+    .tickercontainer{
+      width: 50vw;
+    }
+    .w-button {
+      width: 30vw;
+    }
+    .connectarea{
+      width: 30vw;
+    }
+    .topconnectbutton{
+      width: 30vw;
+    }
+   }
+   
  @media only screen and (max-width:768px){
   .tickercontainer{
     width: 80vw;
@@ -443,5 +472,32 @@
   }
   .topconnectbutton{
     width: 40vw;
+  }
+ }
+ 
+ @media only screen and (max-width:450px){
+  .tickercontainer{
+    width: 80vw;
+  }
+  .w-button {
+    width: 50vw;
+  }
+  .connectarea{
+    width: 50vw;
+    font-size: 0.75em;
+  }
+  .topconnectbutton{
+    width: 50vw;
+  }
+ }
+
+ @media only screen and (max-height:820px){
+  .mainlayout{
+    height:120vh;
+  }
+ }
+ @media only screen and (max-height:720px){
+  .mainlayout{
+    height:140vh;
   }
  }

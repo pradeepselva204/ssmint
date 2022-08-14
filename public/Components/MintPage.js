@@ -230,7 +230,7 @@ const MintPage = () =>{
         }
     }
     const verifyWhitelist = async () =>{
-        console.log(state)
+        
         if(state.contract===undefined){
 
             await checkMetaMask()
@@ -7913,7 +7913,7 @@ const MintPage = () =>{
                                         </> :
 
                                         <>
-                                            {console.log(state)}
+                                          
                                             <button className="primary-button hero w-button" onClick={verifyWallet}>Verify Whitelist</button>
                                             <button className="primary-button hero w-button" onClick={mint}>MINT</button>
                                             <button className="primary-button hero w-button" onClick={disconnectWallet}>Disconnect Wallet</button>                                          

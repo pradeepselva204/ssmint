@@ -431,4 +431,17 @@
     cursor: pointer;
     border-radius: 0;
   }
- 
+ @media only screen and (max-width:768px){
+  .tickercontainer{
+    width: 80vw;
+  }
+  .w-button {
+    width: 40vw;
+  }
+  .connectarea{
+    width: 40vw;
+  }
+  .topconnectbutton{
+    width: 40vw;
+  }
+ }

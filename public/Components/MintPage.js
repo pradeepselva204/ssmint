@@ -154,7 +154,7 @@ const MintPage = () =>{
     }
 
     const whitelistTimer = () =>{
-        let wLCommenceTime = new Date("2022/08/15 16:58:00");
+        let wLCommenceTime = new Date("2022/08/15 12:58:00");
         let endTime = new Date("2022/08/15 19:58:00");
         
 
@@ -359,7 +359,7 @@ const MintPage = () =>{
             return            
         }
         setConnectLoading(false)
-        toast.success("Check Your Wallet for the Blockchain Transaction.")
+        toast.success("Minting in Progress. Check Your Wallet for the Blockchain Transaction.")
     }    
     const verifyWallet = async () =>{
         if(!connectLoading){

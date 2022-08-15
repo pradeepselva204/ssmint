@@ -154,15 +154,18 @@ const MintPage = () =>{
     }
 
     const whitelistTimer = () =>{
-        let wLCommenceTime = new Date("2022/08/15 12:58:00").toLocaleString('en-US', { timeZone: 'America/New_York' });        
-        console.log(wLCommenceTime)
-        let endTime = new Date("2022/08/15 19:58:00").toLocaleString('en-US', { timeZone: 'America/New_York' })
-        console.log(endTime)
+        let wLCommenceTime = new Date("2022/08/15 09:00:00 GMT")
+        
+        let endTime = new Date("2022/08/15 16:00:00 GMT")
+        
 
         let endTimeParse = Date.parse(endTime) / 1000
         let commenceTimeParse = Date.parse(wLCommenceTime) / 1000
-        let now = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });        
-        let nowParse = Date.parse(now) / 1000;
+        let now = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });  
+        let utcnow = new Date().toUTCString()
+        let nowParse = Date.parse(utcnow) / 1000;
+        
+
         
         let timeLeft = nowParse - endTimeParse;//endTimeParse - nowParse
         timeLeft = 120 - timeLeft;
@@ -235,14 +238,15 @@ const MintPage = () =>{
             }            
         }
 
-        wLCommenceTime = new Date("2022/08/15 20:28:00").toLocaleString('en-US', { timeZone: 'America/New_York' });  
-        endTime = new Date("2022/08/15 22:28:00").toLocaleString('en-US', { timeZone: 'America/New_York' });  
+        wLCommenceTime = new Date("2022/08/15 16:28:00 GMT")
+        endTime = new Date("2022/08/15 18:28:00 GMT")
         
 
         endTimeParse = Date.parse(endTime) / 1000
         commenceTimeParse = Date.parse(wLCommenceTime) / 1000
-        now = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });  
-        nowParse = Date.parse(now) / 1000;
+        now = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })
+        utcnow = new Date().toUTCString()
+        nowParse = Date.parse(utcnow) / 1000;
         
         timeLeft = nowParse - endTimeParse;//endTimeParse - nowParse
         timeLeft = 120 - timeLeft;

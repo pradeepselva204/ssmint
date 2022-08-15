@@ -154,13 +154,14 @@ const MintPage = () =>{
     }
 
     const whitelistTimer = () =>{
-        let wLCommenceTime = new Date("2022/08/15 12:58:00");
-        let endTime = new Date("2022/08/15 19:58:00");
-        
+        let wLCommenceTime = new Date("2022/08/15 12:58:00").toLocaleString('en-US', { timeZone: 'America/New_York' });        
+        console.log(wLCommenceTime)
+        let endTime = new Date("2022/08/15 19:58:00").toLocaleString('en-US', { timeZone: 'America/New_York' })
+        console.log(endTime)
 
         let endTimeParse = Date.parse(endTime) / 1000
         let commenceTimeParse = Date.parse(wLCommenceTime) / 1000
-        let now = new Date();
+        let now = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });        
         let nowParse = Date.parse(now) / 1000;
         
         let timeLeft = nowParse - endTimeParse;//endTimeParse - nowParse
@@ -234,13 +235,13 @@ const MintPage = () =>{
             }            
         }
 
-        wLCommenceTime = new Date("2022/08/15 20:28:00");
-        endTime = new Date("2022/08/15 22:28:00");
+        wLCommenceTime = new Date("2022/08/15 20:28:00").toLocaleString('en-US', { timeZone: 'America/New_York' });  
+        endTime = new Date("2022/08/15 22:28:00").toLocaleString('en-US', { timeZone: 'America/New_York' });  
         
 
         endTimeParse = Date.parse(endTime) / 1000
         commenceTimeParse = Date.parse(wLCommenceTime) / 1000
-        now = new Date();
+        now = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });  
         nowParse = Date.parse(now) / 1000;
         
         timeLeft = nowParse - endTimeParse;//endTimeParse - nowParse
@@ -7937,7 +7938,7 @@ const MintPage = () =>{
                                             <b>*</b>
                                             <span>
                                                 <div style={{display:"inline"}}>
-                                                    Price 0.11 ETH
+                                                    Price 0.089 ETH
                                                 </div>
                                             </span>
                                             {/* <span>
@@ -7998,7 +7999,7 @@ const MintPage = () =>{
                                             <b>*</b>
                                             <span>
                                                 <div style={{display:"inline"}}>
-                                                    Price 0.13 ETH 
+                                                    Price 0.099 ETH 
                                                 </div>
                                             </span>
                                             {/* <span>

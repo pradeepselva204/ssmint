@@ -52,6 +52,7 @@ const MintPage = () =>{
     const [wlActive,setWlActive]=useState(false)
     const [saleStatus,setSaleStatus] = useState(true)
     const [saleActive,setSaleActive]=useState(false)
+    const [mintActive,setMintActive] = useState(false)
     const [state,setState] = useState(defaultState)
     const [connect,setConnect] = useState(false)
     const [connectLoading,setConnectLoading] = useState(false)
@@ -70,11 +71,12 @@ const MintPage = () =>{
     const connectWallet = async() =>{
         try{
             
-            setConnectLoading(true)      
+               
             const connection = await web3Modal.connect()
             
             await setProvider(connection)
             // delay(100)
+            setConnectLoading(true)   
             await checkMetaMask()
             setConnectLoading(false)      
         }catch(e){
@@ -152,8 +154,8 @@ const MintPage = () =>{
     }
 
     const whitelistTimer = () =>{
-        let wLCommenceTime = new Date("2022/08/14 09:51:00");
-        let endTime = new Date("2022/08/14 09:52:00");
+        let wLCommenceTime = new Date("2022/08/15 16:58:00");
+        let endTime = new Date("2022/08/15 19:58:00");
         
 
         let endTimeParse = Date.parse(endTime) / 1000
@@ -171,6 +173,7 @@ const MintPage = () =>{
         if(timeLeft<0 && commenceTimeLeft<0){
             setWlActive(false)
             setWlStatus(false)
+            setMintActive(false)
         }else{
             if(commenceTimeLeft>=0){
                 
@@ -200,6 +203,7 @@ const MintPage = () =>{
                 if(timeLeft>=0)
                 {		
                     if(!wlActive){setWlActive(true)}
+                    if(!mintActive){setMintActive(true)}
                 
                     let countdays = Math.floor(timeLeft / 86400);
                     let counthours = Math.floor((timeLeft - countdays * 86400) / 3600);
@@ -225,12 +229,13 @@ const MintPage = () =>{
                 }  else{
                     setWlActive(false)
                     setWlStatus(false)
+                    setMintActive(false)
                 }                     
             }            
         }
 
-        wLCommenceTime = new Date("2022/08/14 10:00:00");
-        endTime = new Date("2022/08/14 10:03:00");
+        wLCommenceTime = new Date("2022/08/15 20:28:00");
+        endTime = new Date("2022/08/15 22:28:00");
         
 
         endTimeParse = Date.parse(endTime) / 1000
@@ -248,6 +253,7 @@ const MintPage = () =>{
         if(timeLeft<0 && commenceTimeLeft<0){
             setSaleActive(false)
             setSaleStatus(false)
+            setMintActive(false)
         }else{
             if(commenceTimeLeft>=0){
                 
@@ -277,7 +283,7 @@ const MintPage = () =>{
                 if(timeLeft>=0)
                 {		
                     if(!saleActive){setSaleActive(true)}
-                    
+                    if(!mintActive){setMintActive(true)}
                     let countdays = Math.floor(timeLeft / 86400);
                     let counthours = Math.floor((timeLeft - countdays * 86400) / 3600);
                     let countminutes = Math.floor(
@@ -302,6 +308,7 @@ const MintPage = () =>{
                 }  else{
                     setSaleActive(false)
                     setSaleStatus(false)
+                    setMintActive(false)
                 }                     
             }            
         }
@@ -341,13 +348,18 @@ const MintPage = () =>{
     }
     const tokenMint = async () =>{
         await checkMetaMask()
+        setConnectLoading(true)
         try{
 
             await state.contract.mint(state.mintAmount, {value:state.tokenPrice.mul(state.mintAmount)});
         }catch(err)
         {
+            setConnectLoading(false)
             toast.error(err.message)
+            return            
         }
+        setConnectLoading(false)
+        toast.success("Check Your Wallet for the Blockchain Transaction.")
     }    
     const verifyWallet = async () =>{
         if(!connectLoading){
@@ -4088,6 +4100,7 @@ const MintPage = () =>{
     }
     const whitelistMint = async () =>{
         await checkMetaMask()
+        setConnectLoading(true)
         const addresses= [
             "0xD4058183C15b9a3FccD59f161A2345945dD93d11",
             "0x508c75631652062B26DaA00d88e8C47A8F2E4343",
@@ -7810,18 +7823,25 @@ const MintPage = () =>{
                 await(state.contract.whitelistMint(state.mintAmount,proof,{value:state.tokenPrice.mul(state.mintAmount)}))
             }catch(err){
                 if(err?.reason){
-
+                    setConnectLoading(false)
                     toast.error(err.reason)
+                    return
                 }
                 else{
+                    setConnectLoading(false)
                     toast.error(err.message)
+                    return
                 }
             }
 
         }
         else{
+            setConnectLoading(false)
             toast.error("You are not authorized whitelist Minter!!!")
+            return
         }
+        toast.success("Check Your Wallet for the Blockchain Transaction.")
+        setConnectLoading(false)    
     }
     const getNFTs = async () =>{
         const options = {chain:"0x4",address:"0xD4058183C15b9a3FccD59f161A2345945dD93d11",token_address:"0x65EC956d1a4dDA184fa4cC8487c478C39E4B0DD7"}
@@ -7857,14 +7877,16 @@ const MintPage = () =>{
                             </div>
                     <div className="bg">
                         <div className="mainlayout">
-                            {/* {connectLoading && 
+                            {connectLoading && 
                             
                                 <>
                                     <div className="loadinglayout">
-                                        <div className="loader">Loading</div>
+                                        {/* <div className="loader">Loading</div> */}
+                                        {/* <div class="lds-facebook"><div></div><div></div><div></div></div> */}
+                                        <div className="lds-hourglass"></div>
                                     </div>
                                 </>
-                            } */}
+                            }
                             <div className='tickercontainer'>
                                 <div className="tickercontainerbox">
                                     <div className='tickerdisplay'>
@@ -7915,14 +7937,14 @@ const MintPage = () =>{
                                             <b>*</b>
                                             <span>
                                                 <div style={{display:"inline"}}>
-                                                    Price 0.11
+                                                    Price 0.11 ETH
                                                 </div>
                                             </span>
-                                            <span>
+                                            {/* <span>
                                                 <div style={{display:"inline"}}>
                                                     <img alt="ETH" src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg" style={{marginLeft:"2px",height:"20px"}}></img>              
                                                 </div>
-                                            </span>
+                                            </span> */}
                                         </div>                                        
                                     </div>
                                 </div>
@@ -7972,18 +7994,18 @@ const MintPage = () =>{
                                             </div>
                                         </div>
                                         <div className="tickernotification">
-                                            <span>Max 7 Tokens</span>
+                                            <span>Max 10 Tokens</span>
                                             <b>*</b>
                                             <span>
                                                 <div style={{display:"inline"}}>
                                                     Price 0.13 ETH 
                                                 </div>
                                             </span>
-                                            <span>
+                                            {/* <span>
                                                 <div style={{display:"inline"}}>
                                                     <img alt="ETH" src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg" style={{marginLeft:"2px",height:"20px"}}></img>              
                                                 </div>
-                                            </span>
+                                            </span> */}
                                         </div>
                                     </div>
                                 </div>      
@@ -8004,11 +8026,11 @@ const MintPage = () =>{
                                         <div className="tickercontainerbox">
                                             <div className='tickerdisplay'>
                                                 <div className='tickerminted'>
-                                                    Total Price:  {utils.formatEther(state.tokenPrice.mul(state.mintAmount))}                                                     
-                                                    <div style={{display:"inline"}}>
+                                                    Total Price:  {utils.formatEther(state.tokenPrice.mul(state.mintAmount))} ETH
+                                                    {/* <div style={{display:"inline"}}>
 
                                                         <img alt="ETH" src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg" style={{marginLeft:"10px",height:"25px"}}></img>                                                    
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                             </div>
                                         </div>                                                                         
@@ -8068,7 +8090,7 @@ const MintPage = () =>{
                                         <>
                                           
                                             <button className="primary-button hero w-button" onClick={verifyWallet}>Verify Whitelist</button>
-                                            <button className="primary-button hero w-button" onClick={mint}>MINT</button>
+                                            { mintActive && <button className="primary-button hero w-button" onClick={mint}>MINT</button>}
                                             <button className="primary-button hero w-button" onClick={disconnectWallet}>Disconnect Wallet</button>                                          
                                         </>
                                     }

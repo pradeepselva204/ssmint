@@ -130,7 +130,7 @@ const MintPage = () =>{
                     paused = true
                 }
                 else{
-                    perTx = 7
+                    perTx = 10
                     paused = false
                 }
 
@@ -8090,11 +8090,13 @@ const MintPage = () =>{
                                             {/* <div className="loadinglayout">
                                                 <div className="loader">Minting</div>
                                             </div> */}
+                                            
                                         </> :
 
                                         <>
                                           
                                             <button className="primary-button hero w-button" onClick={verifyWallet}>Verify Whitelist</button>
+                                            {/* <button className="primary-button hero w-button" onClick={mint}>MINT</button> */}
                                             { mintActive && <button className="primary-button hero w-button" onClick={mint}>MINT</button>}
                                             <button className="primary-button hero w-button" onClick={disconnectWallet}>Disconnect Wallet</button>                                          
                                         </>

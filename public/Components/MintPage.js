@@ -7954,7 +7954,7 @@ const MintPage = () =>{
                                             <b>*</b>
                                             <span>
                                                 <div style={{display:"inline"}}>
-                                                    Price 0.089 ETH
+                                                    Price 0.060 ETH
                                                 </div>
                                             </span>
                                             {/* <span>
@@ -8015,7 +8015,7 @@ const MintPage = () =>{
                                             <b>*</b>
                                             <span>
                                                 <div style={{display:"inline"}}>
-                                                    Price 0.099 ETH 
+                                                    Price 0.069 ETH 
                                                 </div>
                                             </span>
                                             {/* <span>

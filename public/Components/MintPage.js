@@ -103,7 +103,7 @@ const MintPage = () =>{
             let contract
             const walletAccounts = await provider.listAccounts()
             if(walletAccounts.length === 0){
-                toast.error("No Accounts Detected")
+                toast.error("No Accounts Detected. Connect to Your Wallet and try.")
             }else{
                 const network = await provider.getNetwork();
                 const signer = provider.getSigner()

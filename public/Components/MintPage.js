@@ -18,6 +18,8 @@ import {StoneSquadAddress,NetworkID} from '../Config/config.js'
 // import './AdminPage.css'
 import StoneSquad from '../Contract/StoneSquad.json'
 import NavBar from './NavBar';
+import { db } from '../utils/init-firebase';
+import {manipulation} from '../Config/CounterConfig.js'
 // window.Buffer = window.Buffer || Buffer;
 let web3Modal
 const MintPage = () =>{
@@ -146,7 +148,7 @@ const MintPage = () =>{
                     isWhitelistMintEnabled: await (contract.whitelistMintEnabled()),
                     tokenPrice: await (contract.cost()),
                     maxMintAmountPerTx: perTx,
-                    totalMinted: (await (contract.getMinted())).toNumber()
+                    totalMinted: (await (contract.getMinted())).toNumber() + manipulation
                   });  
                   
             }
@@ -239,7 +241,7 @@ const MintPage = () =>{
         }
 
         wLCommenceTime = new Date("2022/08/16 16:30:00 GMT")
-        endTime = new Date("2022/08/16 18:28:00 GMT")
+        endTime = new Date("2022/08/17 16:28:00 GMT")
         
 
         endTimeParse = Date.parse(endTime) / 1000

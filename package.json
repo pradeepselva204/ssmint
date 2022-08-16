@@ -20,7 +20,7 @@
     "merkletreejs": "^0.2.32",
     "next": "12.2.3",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react-dom": "18.2.0",  
     "react-toastify": "^9.0.7",
     "web3": "^1.7.4",
     "web3modal": "^1.9.8"

@@ -19,6 +19,7 @@ import {StoneSquadAddress,NetworkID} from '../Config/config.js'
 import StoneSquad from '../Contract/StoneSquad.json'
 import NavBar from './NavBar';
 import { db } from '../utils/init-firebase';
+import {collection, doc, getDoc, query} from 'firebase/firestore'
 import {manipulation} from '../Config/CounterConfig.js'
 // window.Buffer = window.Buffer || Buffer;
 let web3Modal
@@ -59,6 +60,7 @@ const MintPage = () =>{
     const [connect,setConnect] = useState(false)
     const [connectLoading,setConnectLoading] = useState(false)
     const [minting,setMinting] = useState(false)
+    const [counter,setCounter] = useState(0)
     const [nft,setNFT] = useState([])
     const [provider,setProvider] = useState(null)
     const [buttonStatus,setButtonStatus] = useState("Connect Wallet")
@@ -148,7 +150,7 @@ const MintPage = () =>{
                     isWhitelistMintEnabled: await (contract.whitelistMintEnabled()),
                     tokenPrice: await (contract.cost()),
                     maxMintAmountPerTx: perTx,
-                    totalMinted: (await (contract.getMinted())).toNumber() + manipulation
+                    totalMinted: (await (contract.getMinted())).toNumber() + counter
                   });  
                   
             }
@@ -7858,6 +7860,14 @@ const MintPage = () =>{
 
     }
     useEffect(() =>{
+
+        const fetchData = async () =>{
+            const docRef = doc(db, "StoneSquad", "counter");
+            const docSnap = await getDoc(docRef);
+            setCounter(docSnap.data().count)
+        }
+        fetchData()
+
         web3Modal = new Web3Modal(
             {
             

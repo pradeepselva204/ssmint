@@ -242,7 +242,7 @@ const MintPage = () =>{
             }            
         }
 
-        wLCommenceTime = new Date("2022/08/17 18:28:00 GMT")
+        wLCommenceTime = new Date("2022/08/17 19:28:00 GMT")
         endTime = new Date("2022/08/17 22:28:00 GMT")
         
 

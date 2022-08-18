@@ -160,7 +160,7 @@ const MintPage = () =>{
     const whitelistTimer = () =>{
         let wLCommenceTime = new Date("2022/08/17 14:00:00 GMT")
         
-        let endTime = new Date("2022/08/18 01:58:00 GMT")
+        let endTime = new Date("2022/08/18 07:58:00 GMT")
         
 
         let endTimeParse = Date.parse(endTime) / 1000
@@ -242,8 +242,8 @@ const MintPage = () =>{
             }            
         }
 
-        wLCommenceTime = new Date("2022/08/18 02:28:00 GMT")
-        endTime = new Date("2022/08/18 06:28:00 GMT")
+        wLCommenceTime = new Date("2022/08/18 08:28:00 GMT")
+        endTime = new Date("2022/08/18 10:28:00 GMT")
         
 
         endTimeParse = Date.parse(endTime) / 1000

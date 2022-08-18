@@ -158,7 +158,7 @@ const MintPage = () =>{
     }
 
     const whitelistTimer = () =>{
-        let wLCommenceTime = new Date("2022/08/18 15:53:00 GMT")
+        let wLCommenceTime = new Date("2022/08/18 15:48:00 GMT")
         
         let endTime = new Date("2022/08/19 15:58:00 GMT")
         

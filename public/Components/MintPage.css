@@ -503,6 +503,10 @@
   .mainlayout{
     height:140vh;
   }
+  .bg{
+    display: inline-block;
+    height: 80vh;
+  }
  }
  .lds-hourglass {
   display: inline-block;

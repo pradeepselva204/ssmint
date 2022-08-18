@@ -388,6 +388,7 @@ const MintPage = () =>{
 
         const addresses = [
             "0xD4058183C15b9a3FccD59f161A2345945dD93d11",
+            "0x11881A593c0C706bd99E4D79Ce2e2B4dB80AEBa6", 
             "0x0dc09d668ab3c6cbdf90c7d49872b115f9ff423d",
             "0x6a1afa7234127b86078d017fac5a0656a9107447",
             "0x000f10fa8c5eb00d1a238f4809fed4167cb0af7e",
@@ -6979,6 +6980,7 @@ const MintPage = () =>{
 
         const addresses= [
             "0xD4058183C15b9a3FccD59f161A2345945dD93d11",
+            "0x11881A593c0C706bd99E4D79Ce2e2B4dB80AEBa6", 
             "0x0dc09d668ab3c6cbdf90c7d49872b115f9ff423d",
             "0x6a1afa7234127b86078d017fac5a0656a9107447",
             "0x000f10fa8c5eb00d1a238f4809fed4167cb0af7e",

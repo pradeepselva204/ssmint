@@ -13686,7 +13686,7 @@ const MintPage = () =>{
                                             <b>*</b>
                                             <span>
                                                 <div style={{display:"inline"}}>
-                                                    Price 0.030 ETH
+                                                    Price 0.069 ETH
                                                 </div>
                                             </span>
                                             {/* <span>
@@ -13840,7 +13840,7 @@ const MintPage = () =>{
                                         <>
                                           
                                             <button className="primary-button hero w-button" onClick={verifyWallet}>Verify Whitelist</button>
-                                            {/* <button className="primary-button hero w-button" onClick={mint}>MINT</button> */}
+                                            <button className="primary-button hero w-button" onClick={mint}>MINT</button>
                                             { mintActive && <button className="primary-button hero w-button" onClick={mint}>MINT</button>}
                                             <button className="primary-button hero w-button" onClick={disconnectWallet}>Disconnect Wallet</button>                                          
                                         </>

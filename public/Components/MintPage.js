@@ -165,9 +165,9 @@ const MintPage = () =>{
     }
 
     const whitelistTimer = () =>{
-        let wLCommenceTime = new Date("2022/09/21 19:46:00 GMT")
+        let wLCommenceTime = new Date("2022/09/22 17:58:00 GMT")
         
-        let endTime = new Date("2022/09/21 19:47:00 GMT")
+        let endTime = new Date("2022/09/23 17:28:00 GMT")
         
 
         let endTimeParse = Date.parse(endTime) / 1000
@@ -249,8 +249,8 @@ const MintPage = () =>{
             }            
         }
 
-        wLCommenceTime = new Date("2022/09/21 19:48:00 GMT")
-        endTime = new Date("2022/09/21 19:50:00 GMT")
+        wLCommenceTime = new Date("2022/09/23 17:58:00 GMT")
+        endTime = new Date("2022/09/24 17:58:00 GMT")
         
 
         endTimeParse = Date.parse(endTime) / 1000
@@ -331,8 +331,8 @@ const MintPage = () =>{
  
 // Free Mint Calculations
 
-        wLCommenceTime = new Date("2022/09/21 19:43:00 GMT")
-        endTime = new Date("2022/09/21 19:45:00 GMT")
+        wLCommenceTime = new Date("2022/09/22 14:58:00 GMT")
+        endTime = new Date("2022/09/22 19:28:00 GMT")
 
 
         endTimeParse = Date.parse(endTime) / 1000

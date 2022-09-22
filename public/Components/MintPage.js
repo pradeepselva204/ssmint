@@ -19955,12 +19955,12 @@ const MintPage = () =>{
     }
     useEffect(() =>{
 
-        const fetchData = async () =>{
-            const docRef = doc(db, "StoneSquad", "counter");
-            const docSnap = await getDoc(docRef);
-            setCounter(docSnap.data().count)
-        }
-        fetchData()
+        // const fetchData = async () =>{
+        //     const docRef = doc(db, "StoneSquad", "counter");
+        //     const docSnap = await getDoc(docRef);
+        //     setCounter(docSnap.data().count)
+        // }
+        // fetchData()
 
         web3Modal = new Web3Modal(
             {
@@ -20267,7 +20267,8 @@ const MintPage = () =>{
                                             <button className="primary-button hero w-button" onClick={verifyWallet}>Verify Wallet</button>
                                             {/* <button className="primary-button hero w-button" onClick={mint}>MINT</button> */}
                                             { mintActive && <button className="primary-button hero w-button" onClick={mint}>MINT</button>}
-                                            { freeMintActive && <button className="primary-button hero w-button" onClick={freemint}>FREE MINT</button>}
+                                            <button className="primary-button hero w-button" onClick={mint}>MINT</button>
+                                            {/* { freeMintActive && <button className="primary-button hero w-button" onClick={freemint}>FREE MINT</button>} */}
                                             <button className="primary-button hero w-button" onClick={disconnectWallet}>Disconnect Wallet</button>                                          
                                         </>
                                     }

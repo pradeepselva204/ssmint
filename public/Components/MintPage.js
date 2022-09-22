@@ -332,7 +332,7 @@ const MintPage = () =>{
 // Free Mint Calculations
 
         wLCommenceTime = new Date("2022/09/22 14:58:00 GMT")
-        endTime = new Date("2022/09/22 19:28:00 GMT")
+        endTime = new Date("2022/09/22 17:28:00 GMT")
         endTimeParse = Date.parse(endTime) / 1000
         commenceTimeParse = Date.parse(wLCommenceTime) / 1000
         now = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })

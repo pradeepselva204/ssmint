@@ -133,15 +133,15 @@ const MintPage = () =>{
                     
                 }
                 
-                let perTx = 5
+                let perTx = 1
                 let paused = true
                 if(await (contract.paused()))
                 {
-                    perTx = 5
+                    perTx = 1
                     paused = true
                 }
                 else{
-                    perTx = 10
+                    perTx = 20
                     paused = false
                 }
 

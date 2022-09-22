@@ -20267,7 +20267,7 @@ const MintPage = () =>{
                                             <button className="primary-button hero w-button" onClick={verifyWallet}>Verify Wallet</button>
                                             {/* <button className="primary-button hero w-button" onClick={mint}>MINT</button> */}
                                             { mintActive && <button className="primary-button hero w-button" onClick={mint}>MINT</button>}
-                                            <button className="primary-button hero w-button" onClick={mint}>MINT</button>
+                                            {/* <button className="primary-button hero w-button" onClick={mint}>MINT</button> */}
                                             {/* { freeMintActive && <button className="primary-button hero w-button" onClick={freemint}>FREE MINT</button>} */}
                                             <button className="primary-button hero w-button" onClick={disconnectWallet}>Disconnect Wallet</button>                                          
                                         </>

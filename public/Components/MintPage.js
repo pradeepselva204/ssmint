@@ -333,8 +333,6 @@ const MintPage = () =>{
 
         wLCommenceTime = new Date("2022/09/22 14:58:00 GMT")
         endTime = new Date("2022/09/22 19:28:00 GMT")
-
-
         endTimeParse = Date.parse(endTime) / 1000
         commenceTimeParse = Date.parse(wLCommenceTime) / 1000
         now = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })
@@ -14022,7 +14020,7 @@ const MintPage = () =>{
 
                                         <>
                                           
-                                            <button className="primary-button hero w-button" onClick={verifyWallet}>Verify Whitelist</button>
+                                            <button className="primary-button hero w-button" onClick={verifyWallet}>Verify Wallet</button>
                                             {/* <button className="primary-button hero w-button" onClick={mint}>MINT</button> */}
                                             { mintActive && <button className="primary-button hero w-button" onClick={mint}>MINT</button>}
                                             { freeMintActive && <button className="primary-button hero w-button" onClick={freemint}>FREE MINT</button>}

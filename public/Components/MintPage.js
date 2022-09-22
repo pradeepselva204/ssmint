@@ -19,7 +19,7 @@ import {StoneSquadAddress,NetworkID} from '../Config/config.js'
 import StoneSquad from '../Contract/StoneSquad.json'
 import NavBar from './NavBar';
 import { db } from '../utils/init-firebase';
-import {collection, doc, getDoc, query} from 'firebase/firestore'
+import {collection, doc, getDoc, setDoc,query} from 'firebase/firestore'
 import {manipulation} from '../Config/CounterConfig.js'
 // window.Buffer = window.Buffer || Buffer;
 let web3Modal
@@ -51,11 +51,18 @@ const MintPage = () =>{
     const [salehours, setSaleHours] = useState("");
     const [saleminutes, setSaleMinutes] = useState("");
     const [saleseconds, setSaleSeconds] = useState("");
+    const [freedays, setFreeDays] = useState("");
+    const [freehours, setFreeHours] = useState("");
+    const [freeminutes, setFreeMinutes] = useState("");
+    const [freeseconds, setFreeSeconds] = useState("");
     const [wlStatus,setWlStatus] = useState(true)
     const [wlActive,setWlActive]=useState(false)
+    const [freeStatus,setFreeStatus] = useState(true)
+    const [freeActive,setFreeActive]=useState(false)
     const [saleStatus,setSaleStatus] = useState(true)
     const [saleActive,setSaleActive]=useState(false)
     const [mintActive,setMintActive] = useState(false)
+    const [freeMintActive,setFreeMintActive] = useState(false)
     const [state,setState] = useState(defaultState)
     const [connect,setConnect] = useState(false)
     const [connectLoading,setConnectLoading] = useState(false)
@@ -158,9 +165,9 @@ const MintPage = () =>{
     }
 
     const whitelistTimer = () =>{
-        let wLCommenceTime = new Date("2022/08/18 15:48:00 GMT")
+        let wLCommenceTime = new Date("2022/09/21 19:46:00 GMT")
         
-        let endTime = new Date("2022/08/19 15:58:00 GMT")
+        let endTime = new Date("2022/09/21 19:47:00 GMT")
         
 
         let endTimeParse = Date.parse(endTime) / 1000
@@ -242,8 +249,8 @@ const MintPage = () =>{
             }            
         }
 
-        wLCommenceTime = new Date("2022/08/19 16:28:00 GMT")
-        endTime = new Date("2022/08/20 16:28:00 GMT")
+        wLCommenceTime = new Date("2022/09/21 19:48:00 GMT")
+        endTime = new Date("2022/09/21 19:50:00 GMT")
         
 
         endTimeParse = Date.parse(endTime) / 1000
@@ -322,6 +329,87 @@ const MintPage = () =>{
             }            
         }
  
+// Free Mint Calculations
+
+        wLCommenceTime = new Date("2022/09/21 19:43:00 GMT")
+        endTime = new Date("2022/09/21 19:45:00 GMT")
+
+
+        endTimeParse = Date.parse(endTime) / 1000
+        commenceTimeParse = Date.parse(wLCommenceTime) / 1000
+        now = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })
+        utcnow = new Date().toUTCString()
+        nowParse = Date.parse(utcnow) / 1000;
+
+        timeLeft = nowParse - endTimeParse;//endTimeParse - nowParse
+        timeLeft = 120 - timeLeft;
+
+        commenceTimeLeft = nowParse - commenceTimeParse;//endTimeParse - nowParse
+        commenceTimeLeft = 120 - commenceTimeLeft;
+
+
+        if(timeLeft<0 && commenceTimeLeft<0){
+            setFreeActive(false)
+            setFreeStatus(false)
+            setFreeMintActive(false)
+        }else{
+            if(commenceTimeLeft>=0){
+                
+                let countdays = Math.floor(commenceTimeLeft / 86400);
+                let counthours = Math.floor((commenceTimeLeft - countdays * 86400) / 3600);
+                let countminutes = Math.floor(
+                (commenceTimeLeft - countdays * 86400 - counthours * 3600) / 60
+                );
+                let countseconds = Math.floor(
+                commenceTimeLeft - countdays * 86400 - counthours * 3600 - countminutes * 60
+                );
+                if (counthours < "10") {
+                counthours = "0" + counthours;
+                }
+                if (countminutes < "10") {
+                countminutes = "0" + countminutes;
+                }
+                if (countseconds < "10") {
+                countseconds = "0" + countseconds;
+                }
+                setFreeDays(countdays);
+                setFreeHours(counthours);
+                setFreeMinutes(countminutes);
+                setFreeSeconds(countseconds);
+            }else{
+                
+                if(timeLeft>=0)
+                {		
+                    if(!freeActive){setFreeActive(true)}
+                    if(!freeMintActive){setFreeMintActive(true)}
+                    let countdays = Math.floor(timeLeft / 86400);
+                    let counthours = Math.floor((timeLeft - countdays * 86400) / 3600);
+                    let countminutes = Math.floor(
+                    (timeLeft - countdays * 86400 - counthours * 3600) / 60
+                    );
+                    let countseconds = Math.floor(
+                    timeLeft - countdays * 86400 - counthours * 3600 - countminutes * 60
+                    );
+                    if (counthours < "10") {
+                    counthours = "0" + counthours;
+                    }
+                    if (countminutes < "10") {
+                    countminutes = "0" + countminutes;
+                    }
+                    if (countseconds < "10") {
+                    countseconds = "0" + countseconds;
+                    }
+                    setFreeDays(countdays);
+                    setFreeHours(counthours);
+                    setFreeMinutes(countminutes);
+                    setFreeSeconds(countseconds);
+                }  else{
+                    setFreeActive(false)
+                    setFreeStatus(false)
+                    setFreeMintActive(false)
+                }                     
+            }            
+        }
 
     }
 
@@ -339,6 +427,38 @@ const MintPage = () =>{
             mintAmount: Math.min(state.maxMintAmountPerTx, state.mintAmount + 1)
         })
     }
+    const freemint = async () =>{
+        const docRef = doc(db, "StoneSquad", state.userAddress);
+        const docSnap = await getDoc(docRef);
+        if(docSnap.exists()) 
+        {
+            console.log(docSnap.data().claimed)
+            toast.error("Free Mint Claimed already")
+        }
+        else{
+
+            setMinting(true)
+            if(!state.isPaused){
+                await tokenMint()
+            }
+            
+            if(canWhitelistMint()){
+                await whitelistMint()
+            }
+            setMinting(false)
+            if(state.isPaused && !canWhitelistMint())
+            {
+                
+                toast.error("Sales not active")
+            }
+            await setDoc(doc(db, "StoneSquad", state.userAddress), {
+                claimed: state.userAddress
+              });
+              toast.success("Thanks for the Support")
+        }
+
+    }    
+
     const mint = async () =>{
         setMinting(true)
         if(!state.isPaused){
@@ -13637,6 +13757,68 @@ const MintPage = () =>{
                                 </>
                             }
                             <div className='tickercontainer'>
+                                {/* Free Mint */}
+                                <div className="tickercontainerbox">
+                                    <div className='tickerdisplay'>
+                                        <div className='tickerheader'>
+                                            <div>
+                                                <div className='tickerstatus'>
+                                                    <div className='tickerstatustitle'>
+                                                        Free Mint
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="ticker">
+                                                {(!freeActive && freeStatus )?"Starts in":null}
+                                                {(freeActive && freeStatus ) ? "Ends in" : null}
+                                                {(!freeActive && !freeStatus) ? "Ended" :null }
+                                                {(freeStatus) ?                                                                                                 
+                                                <>
+                                                
+                                                    <div className='tickerboxcontainer'>
+                                                        <div className='tickerbox'>
+                                                            <div className='tickerboxdisplay'>
+                                                                <span>{freedays}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className='tickerbox'>
+                                                            <div className='tickerboxdisplay'>
+                                                                <span>{freehours}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className='tickerbox'>
+                                                            <div className='tickerboxdisplay'>
+                                                                <span>{freeminutes}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className='tickerbox'>
+                                                            <div className='tickerboxdisplay'>
+                                                                <span>{freeseconds}</span>
+                                                            </div>
+                                                        </div>                                                                                                                                                            
+                                                    </div>
+                                                
+                                                </> :null }
+
+                                            </div>                                            
+                                        </div>
+                                        <div className="tickernotification">
+                                            <span>Max 1 Token</span>
+                                            <b>*</b>
+                                            <span>
+                                                <div style={{display:"inline"}}>
+                                                    Price 0.0 ETH
+                                                </div>
+                                            </span>
+                                            {/* <span>
+                                                <div style={{display:"inline"}}>
+                                                    <img alt="ETH" src="https://openseauserdata.com/files/6f8e2979d428180222796ff4a33ab929.svg" style={{marginLeft:"2px",height:"20px"}}></img>              
+                                                </div>
+                                            </span> */}
+                                        </div>                                        
+                                    </div>
+                                </div>       
+                                {/* Whitelist Mint                          */}
                                 <div className="tickercontainerbox">
                                     <div className='tickerdisplay'>
                                         <div className='tickerheader'>
@@ -13682,11 +13864,11 @@ const MintPage = () =>{
                                             </div>                                            
                                         </div>
                                         <div className="tickernotification">
-                                            <span>Max 5 Token</span>
+                                            <span>Max 5 Tokens</span>
                                             <b>*</b>
                                             <span>
                                                 <div style={{display:"inline"}}>
-                                                    Price 0.069 ETH
+                                                    Price 0.01 ETH
                                                 </div>
                                             </span>
                                             {/* <span>
@@ -13697,6 +13879,7 @@ const MintPage = () =>{
                                         </div>                                        
                                     </div>
                                 </div>
+                                {/* Public Sale Mint */}
                                 <div className="tickercontainerbox">
                                     <div className='tickerdisplay'>
                                         <div className='tickerheader'>
@@ -13743,11 +13926,11 @@ const MintPage = () =>{
                                             </div>
                                         </div>
                                         <div className="tickernotification">
-                                            <span>Max 10 Tokens</span>
+                                            <span>Max 20 Tokens</span>
                                             <b>*</b>
                                             <span>
                                                 <div style={{display:"inline"}}>
-                                                    Price 0.025 ETH 
+                                                    Price 0.03 ETH 
                                                 </div>
                                             </span>
                                             {/* <span>
@@ -13842,6 +14025,7 @@ const MintPage = () =>{
                                             <button className="primary-button hero w-button" onClick={verifyWallet}>Verify Whitelist</button>
                                             {/* <button className="primary-button hero w-button" onClick={mint}>MINT</button> */}
                                             { mintActive && <button className="primary-button hero w-button" onClick={mint}>MINT</button>}
+                                            { freeMintActive && <button className="primary-button hero w-button" onClick={freemint}>FREE MINT</button>}
                                             <button className="primary-button hero w-button" onClick={disconnectWallet}>Disconnect Wallet</button>                                          
                                         </>
                                     }

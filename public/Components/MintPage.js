@@ -249,8 +249,8 @@ const MintPage = () =>{
             }            
         }
 
-        wLCommenceTime = new Date("2022/09/23 14:58:00 GMT")
-        endTime = new Date("2022/09/24 14:58:00 GMT")
+        wLCommenceTime = new Date("2022/08/23 14:58:00 GMT")
+        endTime = new Date("2022/08/24 14:58:00 GMT")
         
 
         endTimeParse = Date.parse(endTime) / 1000
